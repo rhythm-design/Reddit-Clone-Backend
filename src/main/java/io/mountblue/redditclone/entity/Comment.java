@@ -2,6 +2,8 @@ package io.mountblue.redditclone.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@Entity
 public class Comment {
 
     @Id
@@ -16,9 +19,15 @@ public class Comment {
 
     private long postId;
 
-    private User user;
+    @ManyToOne
+    private Post post;
 
+    private String userEmail;
+
+    // Nested Comment area
+    @ManyToOne
     private Comment parent;
 
+    @OneToMany
     private List<Comment> childComments;
 }

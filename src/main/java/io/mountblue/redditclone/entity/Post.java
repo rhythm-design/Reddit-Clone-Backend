@@ -4,10 +4,11 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 
-
+@Entity
 @Getter
 @Setter
 public class Post {
@@ -29,12 +30,16 @@ public class Post {
 
     private String postUrl;
 
+    @ManyToOne
     private Subreddit subreddit;
 
-    private Set<String> tags;
+//    private Set<String> tags;
 
     private boolean isDraft;
 
     private long voteCount;
+
+    @OneToMany
+    private List<Comment> comments;
 
 }

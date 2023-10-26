@@ -2,6 +2,7 @@ package io.mountblue.redditclone.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Entity
 public class User {
 
     @Id
@@ -22,9 +24,12 @@ public class User {
 
     private String username;
 
-    private List<Post> savedPosts;
+//    private List<Post> savedPosts;
+//
+//    private List<Post> upvotedPosts;
 
-    private List<Post> upvotedPosts;
+//    private Set<Subreddit> joinedSubreddits;
 
-    private Set<Subreddit> joinedSubreddits;
+    @OneToMany
+    private Set<Subreddit> userCreatedReddits;
 }
