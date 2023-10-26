@@ -11,6 +11,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Table(name = "post")
 public class Post {
 
     @Id
@@ -28,9 +29,10 @@ public class Post {
     @Column(name = "post_image")
     private byte[] image;
 
+    @Column(name = "post_url")
     private String postUrl;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Subreddit subreddit;
 
 //    private Set<String> tags;
@@ -39,7 +41,7 @@ public class Post {
 
     private long voteCount;
 
-    @OneToMany
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
 }

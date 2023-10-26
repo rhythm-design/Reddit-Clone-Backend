@@ -1,9 +1,6 @@
 package io.mountblue.redditclone.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,13 +15,20 @@ import java.util.Set;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
+    @Column(name = "user_email")
     private String email;
 
+    @Column(name = "user_password")
     private String password;
 
+    @Column(name = "user_name")
     private String username;
+
+//    private Subreddit
 
 //    private List<Post> savedPosts;
 //
@@ -32,6 +36,6 @@ public class User {
 
 //    private Set<Subreddit> joinedSubreddits;
 
-    @OneToMany
-    private Set<Subreddit> userCreatedReddits;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Subreddit> userCreatedSubReddits;
 }
