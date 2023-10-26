@@ -28,18 +28,23 @@ public class Post {
     @Column(name = "post_image")
     private byte[] image;
 
+    @Column(name = "post_url")
     private String postUrl;
 
     @ManyToOne
+//    @Column(name = "post_subreddit")
     private Subreddit subreddit;
 
 //    private Set<String> tags;
 
+    @Column(name = "is_draft")
     private boolean isDraft;
 
+    @Column(name = "vote_count")
     private long voteCount;
 
     @OneToMany
+    @Column(name = "post_comments")
     private List<Comment> comments;
 
 }
