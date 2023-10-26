@@ -1,16 +1,14 @@
 package io.mountblue.redditclone.restcontroller.post;
 
-import io.mountblue.redditclone.entity.Comment;
+
 import io.mountblue.redditclone.entity.Post;
 import io.mountblue.redditclone.entity.Subreddit;
 import io.mountblue.redditclone.repositories.post.PostRepository;
-import io.mountblue.redditclone.repositories.post.SubRedditRepository;
+import io.mountblue.redditclone.repositories.post.SubredditRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -19,16 +17,19 @@ public class PostController {
 
     @Autowired
     PostRepository postRepository;
-    @Autowired
-    SubRedditRepository subRedditRepository;
-    @RequestMapping("/createPost")
-    public String addPost(){
 
-        String postTitle = "Fourth Post";
-        String postContent = "Sweet Mosquito";
+    @Autowired
+    SubredditRepository subredditRepository;
+
+    @RequestMapping("/create")
+    public String create(){
+
+
+        String postTitle = "first post";
+        String postContent = "hello world";
 //        byte[] image = new byte[]{0x12, 0x34, 0x56, 0x78};
-        String postUrl = "https://example.com/first-post";
-        Subreddit subreddit = subRedditRepository.getReferenceById(2L);
+        String postUrl = "http://google.com";
+        Subreddit subreddit = subredditRepository.getReferenceById(1L);
         boolean isDraft = false;
         long voteCount = 42;
 
@@ -41,13 +42,15 @@ public class PostController {
         post.setDraft(isDraft);
         post.setVoteCount(voteCount);
 
-
         postRepository.save(post);
-        return "Success";
+
+        return "success, post is saved!!!";
     }
 
-    @PostMapping("/getAll")
-    public List<Post> getAll(){
-        return postRepository.findAll();
+
+    @RequestMapping("/getAll")
+    public List<Subreddit> getAll(){
+        return subredditRepository.findAll();
     }
+
 }
