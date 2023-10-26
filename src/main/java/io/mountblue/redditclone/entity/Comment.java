@@ -10,6 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Table(name = "comment")
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class Comment {
@@ -17,14 +18,15 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private long id;
 
     @Column(name = "comment_post_id")
     private long postId;
 
-//    @ManyToOne
-//    private Post post;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Post post;
 
+    @Column(name = "user_email")
     @Column(name = "user_email")
     @NonNull
     private String userEmail;
@@ -36,13 +38,11 @@ public class Comment {
 
     // Nested Comment area
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "parent_comment")
-    @JsonManagedReference
+    @JoinColumn(name = "comment_id")
+    @JsonBackReference
     private Comment parent;
 
-    @OneToMany(cascade = {
-            CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
-    }, mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Comment> childComments;
 
