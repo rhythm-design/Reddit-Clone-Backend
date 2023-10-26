@@ -1,5 +1,8 @@
 package io.mountblue.redditclone.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,12 +30,14 @@ public class Post {
 
     @Lob
     @Column(name = "post_image")
+    @JsonIgnore
     private byte[] image;
 
     @Column(name = "post_url")
     private String postUrl;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Subreddit subreddit;
 
 //    private Set<String> tags;
@@ -44,6 +49,7 @@ public class Post {
     private long voteCount;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Comment> comments;
 
 }
