@@ -20,6 +20,7 @@ public class Subreddit {
     private long id;
 
     @OneToMany(mappedBy = "subreddit", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Post> subredditPosts;
 
 //    private Set<String> tags;
@@ -29,9 +30,13 @@ public class Subreddit {
     @JsonIgnore
     private User admin;
 
-    @Column(name = "subreddit_access")
+    @Column(name = "subreddit_name")
     private String name;
 
+    @Column(name = "subreddit_description")
+    private String description;
+
+    @Column(name = "subreddit_access")
     private boolean communityType;  // 0 for public, 1 for private
 
 //    @OneToMany

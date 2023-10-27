@@ -37,13 +37,15 @@ public class Post {
     private String postUrl;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference
     private Subreddit subreddit;
 
 //    private Set<String> tags;
 
+    @Column(name = "is_draft")
     private boolean isDraft;
 
+    @Column(name = "vote_count")
     private long voteCount;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
