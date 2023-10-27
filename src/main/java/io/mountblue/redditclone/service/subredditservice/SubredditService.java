@@ -1,8 +1,7 @@
 package io.mountblue.redditclone.service.subredditservice;
 
-import io.mountblue.redditclone.entity.Post;
 import io.mountblue.redditclone.entity.Subreddit;
-import io.mountblue.redditclone.repositories.post.SubredditRepository;
+import io.mountblue.redditclone.repositories.SubredditRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
