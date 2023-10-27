@@ -1,5 +1,6 @@
 package io.mountblue.redditclone.service.impl;
 
+import io.mountblue.redditclone.entity.Comment;
 import io.mountblue.redditclone.entity.Post;
 import io.mountblue.redditclone.entity.Subreddit;
 import io.mountblue.redditclone.repositories.PostRepository;
@@ -81,5 +82,16 @@ public class PostServiceImpl implements PostService {
     @Override
     public void deletePost(Long postId) {
         postRepository.deleteById(postId);
+    }
+
+    @Override
+    public List<Comment> findCommentsByPostId(Long postId) {
+        Optional<Post> postOptional = postRepository.findById(postId);
+
+        if(postOptional.isEmpty()){
+            throw new NoSuchElementException("No Comment found for post id: " + postId);
+        }
+
+        return postOptional.get().getComments();
     }
 }
