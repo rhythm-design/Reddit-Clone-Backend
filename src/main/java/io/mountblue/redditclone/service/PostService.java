@@ -22,4 +22,6 @@ public interface PostService {
     void createPost(CreatePostRequest createPostRequest);
 
     void deletePost(Long postId);
+
+    List<Post> searchByString(String searchString);
 }
