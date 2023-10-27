@@ -49,7 +49,7 @@ public class CommentServiceImpl implements CommentService {
         Comment parent =optionalComment.get();
 
         Comment comment = new Comment();
-        comment.setParent(parent);
+//        comment.setParent(parent);
         comment.setCommentData(createCommentRequest.getCommentData());
         comment.setUserEmail(createCommentRequest.getUserEmail());
 
