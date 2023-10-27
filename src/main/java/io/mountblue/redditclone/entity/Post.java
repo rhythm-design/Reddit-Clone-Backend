@@ -37,7 +37,7 @@ public class Post {
     private String postUrl;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference
     private Subreddit subreddit;
 
 //    private Set<String> tags;

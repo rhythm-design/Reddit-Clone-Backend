@@ -17,5 +17,5 @@ public class CreatePostRequest {
 
     private boolean isDraft;
 
-    private int subredditId;
+    private Long subredditId;
 }

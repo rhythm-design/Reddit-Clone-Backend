@@ -1,5 +1,6 @@
 package io.mountblue.redditclone.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,7 +27,6 @@ public class Comment {
     @ManyToOne(cascade = CascadeType.ALL)
     private Post post;
 
-    @Column(name = "user_email")
     @Column(name = "user_email")
     @NonNull
     private String userEmail;

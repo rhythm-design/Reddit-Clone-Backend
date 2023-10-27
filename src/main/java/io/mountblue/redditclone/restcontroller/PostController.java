@@ -33,6 +33,7 @@ public class PostController {
 
     @GetMapping("/posts")
     public List<Post> getAllPosts(){
+        // TODO: This will not display subreddit, because of @JsonBackResponse at Post entity. Solve this issue
         return postService.findAll();
     }
 }

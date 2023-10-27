@@ -28,29 +28,29 @@ public class CreateCommentController {
         Comment comment2 = new Comment("email2@example.com", "Word2");
         parent.addCommentToParent(comment2);
 
-//        Comment comment3 = new Comment("email3@example.com", "Word3");
-//        parent.addCommentToParent(comment3);
-//
-//        Comment comment4 = new Comment("email4@example.com", "Word4");
-//        comment3.addCommentToParent(comment4);
-//
-//        Comment comment5 = new Comment("email5@example.com", "Word5");
-//        comment3.addCommentToParent(comment5);
+        Comment comment3 = new Comment("email3@example.com", "Word3");
+        parent.addCommentToParent(comment3);
 
-//        Comment comment6 = new Comment("email6@example.com", "Word6");
-//        comment4.addCommentToParent(comment6);
-//
-//        Comment comment7 = new Comment("email7@example.com", "Word7");
-//        comment4.addCommentToParent(comment7);
-//
-//        Comment comment8 = new Comment("email8@example.com", "Word8");
-//        comment5.addCommentToParent(comment8);
-//
-//        Comment comment9 = new Comment("email9@example.com", "Word9");
-//        comment5.addCommentToParent(comment9);
-//
-//        Comment comment10 = new Comment("email10@example.com", "Word10");
-//        comment6.addCommentToParent(comment10);
+        Comment comment4 = new Comment("email4@example.com", "Word4");
+        comment3.addCommentToParent(comment4);
+
+        Comment comment5 = new Comment("email5@example.com", "Word5");
+        comment3.addCommentToParent(comment5);
+
+        Comment comment6 = new Comment("email6@example.com", "Word6");
+        comment4.addCommentToParent(comment6);
+
+        Comment comment7 = new Comment("email7@example.com", "Word7");
+        comment4.addCommentToParent(comment7);
+
+        Comment comment8 = new Comment("email8@example.com", "Word8");
+        comment5.addCommentToParent(comment8);
+
+        Comment comment9 = new Comment("email9@example.com", "Word9");
+        comment5.addCommentToParent(comment9);
+
+        Comment comment10 = new Comment("email10@example.com", "Word10");
+        comment6.addCommentToParent(comment10);
 
 
         if(temp){
