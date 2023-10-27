@@ -94,4 +94,10 @@ public class PostServiceImpl implements PostService {
 
         return postOptional.get().getComments();
     }
+
+    @Override
+    public List<Post> searchByString(String searchString){
+        return postRepository.searchMethod(searchString);
+    }
+
 }

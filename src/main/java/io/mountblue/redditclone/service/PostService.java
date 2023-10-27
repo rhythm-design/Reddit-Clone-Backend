@@ -25,4 +25,6 @@ public interface PostService {
     void deletePost(Long postId);
 
     List<Comment> findCommentsByPostId(Long postId);
+
+    List<Post> searchByString(String searchString);
 }
