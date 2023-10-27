@@ -82,4 +82,10 @@ public class PostServiceImpl implements PostService {
     public void deletePost(Long postId) {
         postRepository.deleteById(postId);
     }
+
+    @Override
+    public List<Post> searchByString(String searchString){
+        return postRepository.searchMethod(searchString);
+    }
+
 }

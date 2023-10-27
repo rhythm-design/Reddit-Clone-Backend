@@ -36,4 +36,11 @@ public class PostController {
         // TODO: This will not display subreddit, because of @JsonBackResponse at Post entity. Solve this issue
         return postService.findAll();
     }
+
+    @GetMapping("/search/{searchString}")
+    public List<Post> searchPost(@PathVariable String searchString) {
+
+        return postService.searchByString(searchString);
+
+    }
 }
