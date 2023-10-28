@@ -18,4 +18,6 @@ public class CreatePostRequest {
     private boolean isDraft;
 
     private Long subredditId;
+
+    private long voteCount;
 }

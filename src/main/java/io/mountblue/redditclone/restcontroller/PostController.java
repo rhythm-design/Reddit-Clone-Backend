@@ -31,6 +31,11 @@ public class PostController {
         return "Post created Sucessfully";
     }
 
+    @PostMapping("/posts/{postId}")
+    public Post findById(@PathVariable Long postId){
+        return postService.findById(postId);
+    }
+
     @GetMapping("/posts")
     public List<Post> getAllPosts(){
         // TODO: This will not display subreddit, because of @JsonBackResponse at Post entity. Solve this issue
