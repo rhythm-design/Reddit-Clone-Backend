@@ -1,4 +1,4 @@
-package io.mountblue.redditclone.repositories.comment;
+package io.mountblue.redditclone.repositories;
 
 import io.mountblue.redditclone.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;

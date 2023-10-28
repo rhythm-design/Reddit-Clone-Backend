@@ -25,6 +25,7 @@ public class Comment {
     private long postId;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
     private Post post;
 
     @Column(name = "user_email")

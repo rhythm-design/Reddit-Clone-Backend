@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -49,7 +50,15 @@ public class Post {
     private long voteCount;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @JsonManagedReference
     private List<Comment> comments;
+
+    public void addComment(Comment comment){
+        if(comments == null){
+            comments = new ArrayList<>();
+        }
+        comment.setPost(this);
+        comments.add(comment);
+    }
 
 }

@@ -1,5 +1,6 @@
 package io.mountblue.redditclone.service;
 
+import io.mountblue.redditclone.entity.Comment;
 import io.mountblue.redditclone.entity.Post;
 import io.mountblue.redditclone.utils.requests.CreatePostRequest;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,8 @@ public interface PostService {
     void createPost(CreatePostRequest createPostRequest);
 
     void deletePost(Long postId);
+
+    List<Comment> findCommentsByPostId(Long postId);
 
     List<Post> searchByString(String searchString);
 }
