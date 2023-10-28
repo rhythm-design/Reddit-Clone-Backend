@@ -1,5 +1,6 @@
 package io.mountblue.redditclone.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +29,9 @@ public class User {
     @Column(name = "user_name")
     private String username;
 
-//    private Subreddit
+    @OneToMany           // a user can create multiple subreddits
+    @JsonBackReference
+    private List<Subreddit> userSubreddits;
 
 //    private List<Post> savedPosts;
 //
