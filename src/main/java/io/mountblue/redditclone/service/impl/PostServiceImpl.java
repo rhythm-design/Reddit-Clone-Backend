@@ -59,6 +59,7 @@ public class PostServiceImpl implements PostService {
         post.setPostContent(createPostRequest.getPostContent());
         post.setPostUrl(createPostRequest.getPostUrl());
         post.setImage(createPostRequest.getImage());
+        post.setVoteCount(createPostRequest.getVoteCount());
         postRepository.save(post);
     }
 
@@ -76,6 +77,7 @@ public class PostServiceImpl implements PostService {
         post.setPostUrl(createPostRequest.getPostUrl());
         post.setDraft(createPostRequest.isDraft());
         post.setSubreddit(postSubreddit);
+        post.setVoteCount(0);
         postRepository.save(post);
     }
 
