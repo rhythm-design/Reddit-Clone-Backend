@@ -74,6 +74,7 @@ public class PostServiceImpl implements PostService {
         post.setPostTitle(createPostRequest.getPostTitle());
         post.setPostContent(createPostRequest.getPostContent());
         post.setImage(createPostRequest.getImage());
+        post.setFlairs(createPostRequest.getFlairs()); // setting flairs as a string entered by the user
         post.setPostUrl(createPostRequest.getPostUrl());
         post.setDraft(createPostRequest.isDraft());
         post.setSubreddit(postSubreddit);

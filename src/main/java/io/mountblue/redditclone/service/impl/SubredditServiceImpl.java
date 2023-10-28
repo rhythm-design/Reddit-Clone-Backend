@@ -1,11 +1,14 @@
 package io.mountblue.redditclone.service.impl;
 
 import io.mountblue.redditclone.entity.Subreddit;
+import io.mountblue.redditclone.entity.User;
 import io.mountblue.redditclone.repositories.SubredditRepository;
+import io.mountblue.redditclone.repositories.UserRepository;
 import io.mountblue.redditclone.service.SubredditService;
 import io.mountblue.redditclone.utils.requests.CreateSubredditRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -15,6 +18,9 @@ import java.util.Optional;
 public class SubredditServiceImpl implements SubredditService {
 
     private SubredditRepository subredditRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     public SubredditServiceImpl(SubredditRepository subredditRepository) {
@@ -47,6 +53,7 @@ public class SubredditServiceImpl implements SubredditService {
         // TODO: Update with User object
         subreddit.setAdmin(null); // for now set it null
         subreddit.setSubredditPosts(null);
+        subreddit.setMembers(null); // initially members will be null
         subreddit.setCommunityType(createSubredditRequest.isSubredditType());
         // TODO: Add tags to new subreddit creation
         subredditRepository.save(subreddit);
@@ -68,5 +75,16 @@ public class SubredditServiceImpl implements SubredditService {
     @Override
     public List<Subreddit> findAll() {
         return subredditRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public void joinSubreddit(Long userId, Long subRedditId) {
+        List<User> currentUserList = subredditRepository.getReferenceById(subRedditId).getMembers();
+        System.out.println(currentUserList);
+        currentUserList.add(userRepository.getReferenceById(userId)); // This will give us a User who clicked join and add it to the current user list
+        System.out.println(currentUserList);
+        subredditRepository.getReferenceById(subRedditId).setMembers(currentUserList);// Updating the new member posts
+        System.out.println(subredditRepository.getReferenceById(subRedditId).getMembers());
     }
 }

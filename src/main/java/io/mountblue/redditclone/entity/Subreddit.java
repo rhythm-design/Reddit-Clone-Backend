@@ -39,7 +39,8 @@ public class Subreddit {
     @Column(name = "subreddit_access")
     private boolean communityType;  // 0 for public, 1 for private
 
-//    @OneToMany
-//    private List<User> members;
+    @Column(name = "members")
+    @ManyToMany
+    private List<User> members;
 
 }

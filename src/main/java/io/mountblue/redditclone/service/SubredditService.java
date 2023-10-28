@@ -19,4 +19,5 @@ public interface SubredditService {
 
     List<Subreddit> findAll();
 
+    void joinSubreddit(Long userId, Long subRedditId);
 }

@@ -29,15 +29,16 @@ public class User {
     @Column(name = "user_name")
     private String username;
 
-    @OneToMany           // a user can create multiple subreddits
-    @JsonBackReference
-    private List<Subreddit> userSubreddits;
+//    @OneToMany           // a user can create multiple subreddits
+//    @JsonBackReference
+//    private List<Subreddit> userSubreddits;
 
 //    private List<Post> savedPosts;
 //
 //    private List<Post> upvotedPosts;
 
-//    private Set<Subreddit> joinedSubreddits;
+    @ManyToMany
+    private Set<Subreddit> joinedSubreddits;
 
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Subreddit> userCreatedSubReddits;
