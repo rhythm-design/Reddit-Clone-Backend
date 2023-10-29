@@ -53,6 +53,9 @@ public class Post {
     @JsonManagedReference
     private List<Comment> comments;
 
+    @Column(name = "category")
+    private String category;
+
     public void addComment(Comment comment){
         if(comments == null){
             comments = new ArrayList<>();
@@ -60,5 +63,4 @@ public class Post {
         comment.setPost(this);
         comments.add(comment);
     }
-
 }

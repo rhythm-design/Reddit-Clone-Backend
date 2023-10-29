@@ -27,4 +27,6 @@ public interface PostService {
     List<Comment> findCommentsByPostId(Long postId);
 
     List<Post> searchByString(String searchString);
+
+    List<Post> findPostsByCategory(String category);
 }

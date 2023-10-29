@@ -73,6 +73,8 @@ public class PostServiceImpl implements PostService {
         Post post = new Post();
         post.setPostTitle(createPostRequest.getPostTitle());
         post.setPostContent(createPostRequest.getPostContent());
+//        post.setImage(createPostRequest.getImage());
+        post.setImage(null);
         post.setImage(createPostRequest.getImage());
 
         if(createPostRequest.getFlairs()==null || postSubreddit.getFlair().contains(createPostRequest.getFlairs())) {
@@ -84,6 +86,8 @@ public class PostServiceImpl implements PostService {
         post.setPostUrl(createPostRequest.getPostUrl());
         post.setDraft(createPostRequest.isDraft());
         post.setSubreddit(postSubreddit);
+        post.setVoteCount(0);
+        post.setCategory(createPostRequest.getCategory());
         post.setVoteCount(0);
         postRepository.save(post);
     }
@@ -105,8 +109,16 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> searchByString(String searchString){
+    public List<Post> searchByString(String searchString) {
         return postRepository.searchMethod(searchString);
+    }
+
+    @Override
+    public List<Post> findPostsByCategory(String category) {
+        // Implement the logic to retrieve posts by the selected category
+
+//        return postRepository.findByCategory(category);
+        return postRepository.findByCategoryIgnoreCase(category);
     }
 
 }

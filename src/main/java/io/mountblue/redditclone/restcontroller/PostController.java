@@ -44,8 +44,12 @@ public class PostController {
 
     @GetMapping("/search/{searchString}")
     public List<Post> searchPost(@PathVariable String searchString) {
-
         return postService.searchByString(searchString);
+    }
+
+    @GetMapping("/posts/category")
+    public List<Post> getPostsByCategory(@RequestParam("category") String category) {
+        return postService.findPostsByCategory(category);
     }
 
 }
