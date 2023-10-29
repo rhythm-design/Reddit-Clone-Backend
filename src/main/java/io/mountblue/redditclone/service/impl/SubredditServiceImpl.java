@@ -81,14 +81,9 @@ public class SubredditServiceImpl implements SubredditService {
     @Override
     @Transactional
     public void joinSubreddit(Long userId, Long subRedditId) {
-        Set<User> currentUserSet = subredditRepository.getReferenceById(subRedditId).getMembers();
-        currentUserSet.add(userRepository.getReferenceById(userId)); // This will give us a User who clicked join and add it to the current user list
-        subredditRepository.getReferenceById(subRedditId).setMembers(currentUserSet);// Updating the new member posts
+        Subreddit subreddit = subredditRepository.getReferenceById(subRedditId);
+        subreddit.getMembers().add(userRepository.getReferenceById(userId));
+        subredditRepository.save(subreddit);
 
-        // Not sure about this in many to many mapping , subreddits getting users inmembers but users are not atteached to subredits in joined subreddits
-        // so i added this methd and in database the table is showing the data but in postman it has some error
-//        Set<Subreddit> currentSubredditList = userRepository.getReferenceById(userId).getJoinedSubreddits();
-//        currentSubredditList.add(subredditRepository.getReferenceById(subRedditId));
-//        userRepository.getReferenceById(userId).setJoinedSubreddits(currentSubredditList);
     }
 }

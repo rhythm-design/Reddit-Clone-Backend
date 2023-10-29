@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 @RestController
@@ -68,6 +70,11 @@ public class UserController {
         }
 
         return ResponseEntity.ok(responseLogin);
+    }
+
+    @GetMapping("/getAllUsers")
+    public List<User> getUsers(){
+        return userRepository.findAll();
     }
 
 }
