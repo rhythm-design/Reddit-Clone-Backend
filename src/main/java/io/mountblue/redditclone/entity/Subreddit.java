@@ -1,5 +1,6 @@
 package io.mountblue.redditclone.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -23,7 +24,7 @@ public class Subreddit {
     @JsonManagedReference
     private List<Post> subredditPosts;
 
-//    private Set<String> tags;
+    private String flair; // flairs will be in comma separated string
 
     @ManyToOne
     @JoinColumn(name = "subreddit_admin")
@@ -39,7 +40,14 @@ public class Subreddit {
     @Column(name = "subreddit_access")
     private boolean communityType;  // 0 for public, 1 for private
 
-//    @OneToMany
-//    private List<User> members;
+    @Column(name = "members")
+    @ManyToMany
+    @JoinTable(
+            name = "subreddit_user",
+            joinColumns = @JoinColumn(name = "subreddit_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    @JsonBackReference
+    private Set<User> members;
 
 }

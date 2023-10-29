@@ -46,6 +46,6 @@ public class PostController {
     public List<Post> searchPost(@PathVariable String searchString) {
 
         return postService.searchByString(searchString);
-
     }
+
 }

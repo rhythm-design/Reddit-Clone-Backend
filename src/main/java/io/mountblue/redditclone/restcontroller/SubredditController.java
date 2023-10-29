@@ -50,4 +50,9 @@ public class SubredditController {
         return subredditService.findAll();
     }
 
+    @PostMapping("/join/{userId}/{subRedditId}")
+    public String joinSubreddit(@PathVariable Long userId ,@PathVariable Long subRedditId){
+        subredditService.joinSubreddit(userId,subRedditId);
+        return "Member added Successfully";
+    }
 }

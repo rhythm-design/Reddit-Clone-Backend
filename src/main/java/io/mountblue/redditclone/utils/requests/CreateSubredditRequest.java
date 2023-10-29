@@ -1,5 +1,6 @@
 package io.mountblue.redditclone.utils.requests;
 
+import io.mountblue.redditclone.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,9 +16,9 @@ public class CreateSubredditRequest {
 
     private String subredditDescription;
 
-    private String adminId;
+    private String admin;
 
-    private Set<String> flairs;
+    private String flairs;
 
     private boolean subredditType;
 }

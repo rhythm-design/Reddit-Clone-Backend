@@ -20,4 +20,7 @@ public class CreatePostRequest {
     private Long subredditId;
 
     private long voteCount;
+
+    private String flairs;
+
 }

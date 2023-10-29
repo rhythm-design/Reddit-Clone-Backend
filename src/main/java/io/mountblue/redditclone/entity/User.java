@@ -1,5 +1,7 @@
 package io.mountblue.redditclone.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,13 +30,13 @@ public class User {
     @Column(name = "user_name")
     private String username;
 
-//    private Subreddit
-
 //    private List<Post> savedPosts;
 //
 //    private List<Post> upvotedPosts;
 
-//    private Set<Subreddit> joinedSubreddits;
+    @ManyToMany
+    @JsonManagedReference
+    private Set<Subreddit> joinedSubreddits;
 
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Subreddit> userCreatedSubReddits;

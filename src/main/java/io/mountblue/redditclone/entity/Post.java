@@ -41,7 +41,7 @@ public class Post {
     @JsonBackReference
     private Subreddit subreddit;
 
-//    private Set<String> tags;
+    private String flairs;
 
     @Column(name = "is_draft")
     private boolean isDraft;
