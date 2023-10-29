@@ -37,7 +37,8 @@ public class User {
 //
 //    private List<Post> upvotedPosts;
 
-    @ManyToMany
+
+    @ManyToMany(mappedBy = "members")
     private Set<Subreddit> joinedSubreddits;
 
     @OneToMany(cascade = CascadeType.ALL)

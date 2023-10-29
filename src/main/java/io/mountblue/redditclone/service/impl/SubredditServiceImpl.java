@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class SubredditServiceImpl implements SubredditService {
@@ -80,11 +81,14 @@ public class SubredditServiceImpl implements SubredditService {
     @Override
     @Transactional
     public void joinSubreddit(Long userId, Long subRedditId) {
-        List<User> currentUserList = subredditRepository.getReferenceById(subRedditId).getMembers();
-        System.out.println(currentUserList);
-        currentUserList.add(userRepository.getReferenceById(userId)); // This will give us a User who clicked join and add it to the current user list
-        System.out.println(currentUserList);
-        subredditRepository.getReferenceById(subRedditId).setMembers(currentUserList);// Updating the new member posts
-        System.out.println(subredditRepository.getReferenceById(subRedditId).getMembers());
+        Set<User> currentUserSet = subredditRepository.getReferenceById(subRedditId).getMembers();
+        currentUserSet.add(userRepository.getReferenceById(userId)); // This will give us a User who clicked join and add it to the current user list
+        subredditRepository.getReferenceById(subRedditId).setMembers(currentUserSet);// Updating the new member posts
+
+        // Not sure about this in many to many mapping , subreddits getting users inmembers but users are not atteached to subredits in joined subreddits
+        // so i added this methd and in database the table is showing the data but in postman it has some error
+//        Set<Subreddit> currentSubredditList = userRepository.getReferenceById(userId).getJoinedSubreddits();
+//        currentSubredditList.add(subredditRepository.getReferenceById(subRedditId));
+//        userRepository.getReferenceById(userId).setJoinedSubreddits(currentSubredditList);
     }
 }

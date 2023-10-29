@@ -41,6 +41,11 @@ public class Subreddit {
 
     @Column(name = "members")
     @ManyToMany
-    private List<User> members;
+    @JoinTable(
+            name = "subreddit_user",
+            joinColumns = @JoinColumn(name = "subreddit_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> members;
 
 }
