@@ -30,14 +30,9 @@ public class User {
     @Column(name = "user_name")
     private String username;
 
-//    @OneToMany           // a user can create multiple subreddits
-//    @JsonBackReference
-//    private List<Subreddit> userSubreddits;
-
 //    private List<Post> savedPosts;
 //
 //    private List<Post> upvotedPosts;
-
 
     @ManyToMany
     @JsonManagedReference

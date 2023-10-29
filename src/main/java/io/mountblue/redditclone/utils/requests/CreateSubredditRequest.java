@@ -16,9 +16,9 @@ public class CreateSubredditRequest {
 
     private String subredditDescription;
 
-    private String admin; // Also changing it to User from string having error in postman i dont know why
+    private String admin;
 
     private String flairs;
 
-    private boolean subredditType; // whats this ??
+    private boolean subredditType;
 }
