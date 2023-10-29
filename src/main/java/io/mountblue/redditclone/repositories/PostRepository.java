@@ -19,4 +19,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "OR LOWER(s.name) LIKE %:searchString%")
     List<Post> searchMethod(@Param("searchString") String searchString);
 
+    List<Post> findByCategoryIgnoreCase(String category);
 }

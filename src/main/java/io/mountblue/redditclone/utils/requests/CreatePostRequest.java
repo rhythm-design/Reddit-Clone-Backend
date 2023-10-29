@@ -21,6 +21,8 @@ public class CreatePostRequest {
 
     private long voteCount;
 
+    private String category;
+
     private String flairs;
 
 }
