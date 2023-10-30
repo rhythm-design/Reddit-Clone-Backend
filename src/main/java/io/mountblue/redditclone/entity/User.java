@@ -21,18 +21,14 @@ public class User {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "user_email")
+    @Column(name = "user_email", unique = true)
     private String email;
 
     @Column(name = "user_password")
     private String password;
 
-    @Column(name = "user_name")
+    @Column(name = "user_name", unique = true)
     private String username;
-
-//    private List<Post> savedPosts;
-//
-//    private List<Post> upvotedPosts;
 
     @ManyToMany
     @JsonManagedReference

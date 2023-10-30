@@ -50,7 +50,7 @@ public class SubredditServiceImpl implements SubredditService {
         Subreddit subreddit = new Subreddit();
         subreddit.setName(createSubredditRequest.getSubredditName());
         subreddit.setDescription((createSubredditRequest.getSubredditDescription()));
-        subreddit.setFlair(createSubredditRequest.getFlairs()); // Getting flairs from the user entered data
+        subreddit.setFlairs(createSubredditRequest.getFlairs()); // Getting flairs from the user entered data
         // TODO: Update with User object
         subreddit.setAdmin(null); // for now set it null
         subreddit.setSubredditPosts(null);
