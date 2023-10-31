@@ -1,5 +1,6 @@
 package io.mountblue.redditclone.utils.requests;
 
+import io.mountblue.redditclone.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,5 +25,7 @@ public class CreatePostRequest {
     private String category;
 
     private String flairs;
+
+    private String user;
 
 }
