@@ -14,11 +14,11 @@ import java.util.function.Function;
 @Component
 public class JWTHelper {
 
-    //requirement :
+
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 
-    //    public static final long JWT_TOKEN_VALIDITY =  60;
-    private String secret = "MoUnTbLuEsEcReTkEyMoUnTbLuEsEcReTkEyMoUnTbLuEsEcReTkEyMoUnTbLuEsEcReTkEyMoUnTbLuEsEcReTkEyMoUnTbLuEsEcReTkEyMoUnTbLuEsEcReTkEyMoUnTbLuEsEcReTkEy";
+
+    private String secret = "MoUnTbLuEsEcReTkEy";
 
     //retrieve username from jwt token
     public String getUsernameFromToken(String token) {
@@ -69,6 +69,5 @@ public class JWTHelper {
         final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
-
 
 }

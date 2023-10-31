@@ -14,10 +14,11 @@ import java.io.PrintWriter;
 public class JWTAthenticationEntryPoint implements AuthenticationEntryPoint{
 
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        PrintWriter writer = response.getWriter();
-        writer.println("Access Denied !! " + authException.getMessage());
+    public void commence(HttpServletRequest request, HttpServletResponse response,
+                         AuthenticationException authException) throws IOException, ServletException {
+
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Access Denined !!");
+
     }
 
 }
