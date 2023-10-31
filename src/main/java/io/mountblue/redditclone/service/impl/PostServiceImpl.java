@@ -5,6 +5,7 @@ import io.mountblue.redditclone.entity.Post;
 import io.mountblue.redditclone.entity.Subreddit;
 import io.mountblue.redditclone.repositories.PostRepository;
 import io.mountblue.redditclone.repositories.SubredditRepository;
+import io.mountblue.redditclone.repositories.UserRepository;
 import io.mountblue.redditclone.service.PostService;
 import io.mountblue.redditclone.utils.requests.CreatePostRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
 
     private SubredditRepository subredditRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     public PostServiceImpl(PostRepository postRepository, SubredditRepository subredditRepository){
@@ -89,6 +93,7 @@ public class PostServiceImpl implements PostService {
         post.setVoteCount(0);
         post.setCategory(createPostRequest.getCategory());
         post.setVoteCount(0);
+        post.setUser(userRepository.findByEmail(createPostRequest.getUser()));
         postRepository.save(post);
     }
 
