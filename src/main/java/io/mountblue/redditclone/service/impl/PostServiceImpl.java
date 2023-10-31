@@ -5,18 +5,22 @@ import io.mountblue.redditclone.entity.Post;
 import io.mountblue.redditclone.entity.Subreddit;
 import io.mountblue.redditclone.repositories.PostRepository;
 import io.mountblue.redditclone.repositories.SubredditRepository;
+import io.mountblue.redditclone.repositories.UserRepository;
 import io.mountblue.redditclone.service.PostService;
 import io.mountblue.redditclone.utils.ImageUtils;
 import io.mountblue.redditclone.utils.requests.CreatePostRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -24,6 +28,9 @@ public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
 
     private SubredditRepository subredditRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     public PostServiceImpl(PostRepository postRepository, SubredditRepository subredditRepository){
@@ -86,11 +93,15 @@ public class PostServiceImpl implements PostService {
         post.setPostUrl(createPostRequest.getPostUrl());
         post.setDraft(createPostRequest.isDraft());
         post.setSubreddit(postSubreddit);
-        post.setVoteCount(0);
         post.setCategory(createPostRequest.getCategory());
         if(createPostRequest.getImage() != null){
             post.setImage(ImageUtils.compressImage(createPostRequest.getImage().getBytes()));
         }
+        post.setVoteCount(0);
+        post.setUser(userRepository.findByEmail(createPostRequest.getUser()).get());
+//        post.setVoteCount(0);
+        post.setVoteCount(createPostRequest.getVoteCount());
+        post.setCreateTime(new Date());
         postRepository.save(post);
     }
 
@@ -121,6 +132,63 @@ public class PostServiceImpl implements PostService {
 
 //        return postRepository.findByCategory(category);
         return postRepository.findByCategoryIgnoreCase(category);
+    }
+
+    @Override
+    public List<Post> findPostsByFlair(String flair) {
+        return postRepository.findByFlairIgnoreCase(flair);
+    }
+
+    @Override
+    public List<Post> findAllSorted(String sortingOption) {
+        Sort sorting;
+        switch (sortingOption) {
+            case "votes":
+                sorting = Sort.by(Sort.Order.desc("voteCount"));
+                break;
+            case "date":
+                sorting = Sort.by(Sort.Order.desc("createTime"));
+                break;
+            default:
+                sorting = Sort.by(Sort.Order.desc("createTime"));
+                break;
+        }
+        return postRepository.findAll(sorting);
+    }
+
+    @Override
+    public Page<Post> findAllSortedPaged(String sortingOption, Pageable pageable) {
+        Sort sorting;
+        switch (sortingOption) {
+            case "votes":
+                sorting = Sort.by(Sort.Order.desc("voteCount"));
+                break;
+            case "date":
+                sorting = Sort.by(Sort.Order.desc("createTime"));
+                break;
+            case "hot":
+                // Sort by voteCount in descending order, and then by createTime in descending order
+                sorting = Sort.by(Sort.Order.desc("voteCount"), Sort.Order.desc("createTime"));
+                break;
+            case "top":
+                // Get the current time
+                Date currentTime = new Date();
+
+                // Calculate the time 1 hour ago
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(currentTime);
+                cal.add(Calendar.HOUR_OF_DAY, -1);
+                Date oneHourAgo = cal.getTime();
+
+                // Create a custom query for posts created in the last 1 hour
+                sorting = Sort.by(Sort.Order.desc("createTime"));
+                return postRepository.findByCreateTimeAfter(oneHourAgo, pageable);
+            default:
+                sorting = Sort.by(Sort.Order.desc("createTime"));
+                break;
+        }
+        Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sorting);
+        return postRepository.findAll(sortedPageable);
     }
 
 }

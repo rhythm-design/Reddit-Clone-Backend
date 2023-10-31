@@ -2,6 +2,8 @@ package io.mountblue.redditclone.utils.requests;
 
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -27,5 +29,7 @@ public class CreatePostRequest {
     private String category;
 
     private String flairs;
+
+    private String user;
 
 }
