@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -48,6 +48,9 @@ public class Post {
 
     @Column(name = "vote_count")
     private long voteCount;
+
+    @Column(name = "create_time")
+    private Date createTime;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     @JsonManagedReference

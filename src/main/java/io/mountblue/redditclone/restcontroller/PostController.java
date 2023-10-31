@@ -9,6 +9,9 @@ import io.mountblue.redditclone.service.PostService;
 import io.mountblue.redditclone.service.impl.PostServiceImpl;
 import io.mountblue.redditclone.utils.requests.CreatePostRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,5 +58,18 @@ public class PostController {
     @PutMapping("/update/{postId}")
     public void updatePostById(Long postId, CreatePostRequest createPostRequest){
         postService.updateById(postId, createPostRequest);
+    }
+
+    @GetMapping("/posts/flair")
+    public List<Post> getPostsByFlair(@RequestParam("flair") String flair){
+        return postService.findPostsByFlair(flair);
+    }
+
+    @GetMapping("/posts/sorted")
+    public ResponseEntity<Page<Post>> getPostsSorted(
+            @RequestParam(name = "sortingOption", required = false) String sortingOption,
+            Pageable pageable) {
+        Page<Post> posts = postService.findAllSortedPaged(sortingOption,pageable);
+        return ResponseEntity.ok(posts);
     }
 }
