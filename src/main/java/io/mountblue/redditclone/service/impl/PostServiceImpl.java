@@ -77,8 +77,8 @@ public class PostServiceImpl implements PostService {
         post.setImage(null);
         post.setImage(createPostRequest.getImage());
 
-        if(createPostRequest.getFlairs()==null || postSubreddit.getFlair().contains(createPostRequest.getFlairs())) {
-            post.setFlairs(createPostRequest.getFlairs()); // setting flairs as a string entered by the user
+        if(createPostRequest.getFlairs()==null || postSubreddit.getFlairs().contains(createPostRequest.getFlairs())) {
+            post.setFlair(createPostRequest.getFlairs()); // setting flairs as a string entered by the user
         }
         else{
           throw new RuntimeException("Flairs Not Allowed by Admin");

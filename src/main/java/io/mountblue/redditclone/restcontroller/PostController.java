@@ -52,4 +52,8 @@ public class PostController {
         return postService.findPostsByCategory(category);
     }
 
+    @PutMapping("/update/{postId}")
+    public void updatePostById(Long postId, CreatePostRequest createPostRequest){
+        postService.updateById(postId, createPostRequest);
+    }
 }

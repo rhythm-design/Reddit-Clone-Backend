@@ -24,7 +24,7 @@ public class Subreddit {
     @JsonManagedReference
     private List<Post> subredditPosts;
 
-    private String flair; // flairs will be in comma separated string
+    private String flairs; // flairs will be in comma separated string
 
     @ManyToOne
     @JoinColumn(name = "subreddit_admin")
