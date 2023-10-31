@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -20,7 +21,7 @@ public interface PostService {
 
     void updateById(Long id, CreatePostRequest createPostRequest);
 
-    void createPost(CreatePostRequest createPostRequest);
+    void createPost(CreatePostRequest createPostRequest) throws IOException;
 
     void deletePost(Long postId);
 

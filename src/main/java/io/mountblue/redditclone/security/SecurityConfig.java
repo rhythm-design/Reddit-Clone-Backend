@@ -47,7 +47,7 @@ public class SecurityConfig {
                             try {
                                 authorize.requestMatchers("/**").permitAll()
                                         .requestMatchers("/fillData").permitAll()
-                                        .requestMatchers("/register", "/success", "/api/").permitAll()
+                                        .requestMatchers("/register", "/success", "/api/**").permitAll()
                                         .requestMatchers("/post/**").permitAll()
                                         .anyRequest().authenticated()
                                         .and().exceptionHandling(ex -> ex.authenticationEntryPoint(jwtAthenticationEntryPoint))

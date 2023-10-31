@@ -1,17 +1,20 @@
 package io.mountblue.redditclone.utils.requests;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CreatePostRequest {
 
     private String postTitle;
 
     private String postContent;
 
-    private byte[] image;
+    private MultipartFile image;
 
     private String postUrl;
 
@@ -19,7 +22,7 @@ public class CreatePostRequest {
 
     private Long subredditId;
 
-    private long voteCount;
+    private Long voteCount;
 
     private String category;
 
