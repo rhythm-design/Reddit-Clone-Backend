@@ -58,7 +58,7 @@ public class UserController {
         System.out.println(inputUser.getEmail());
         System.out.println(inputUser.getPassword());
 
-        User loggedInUser = userRepository.findByEmail(inputUser.getEmail());
+        User loggedInUser = userRepository.findByEmail(inputUser.getEmail()).get();
         System.out.println(loggedInUser);
         Map<String, Object> responseLogin = new HashMap<>();
         if(loggedInUser != null) {
