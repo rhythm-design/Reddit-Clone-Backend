@@ -29,4 +29,10 @@ public interface PostService {
     List<Post> searchByString(String searchString);
 
     List<Post> findPostsByCategory(String category);
+
+    List<Post> findPostsByFlair(String flair);
+
+    List<Post> findAllSorted(String sortingOption);
+
+    Page<Post> findAllSortedPaged(String sortingOption, Pageable pageable);
 }
