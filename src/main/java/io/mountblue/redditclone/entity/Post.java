@@ -61,7 +61,7 @@ public class Post {
     @Column(name = "category")
     private String category;
 
-    @OneToOne
+    @ManyToOne
 
     private User user;
     public void addComment(Comment comment){

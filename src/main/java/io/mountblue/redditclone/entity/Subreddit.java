@@ -23,7 +23,7 @@ public class Subreddit {
     @OneToMany(mappedBy = "subreddit", cascade = {
             CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
     })
-    @JsonManagedReference
+    @JsonBackReference
     private List<Post> subredditPosts;
 
     private String flairs; // flairs will be in comma separated string

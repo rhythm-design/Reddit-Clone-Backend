@@ -47,6 +47,8 @@ public class SubredditController {
 
     @GetMapping("/subreddit")
     public List<Subreddit> getSubreddit() {
+        System.out.println("/subreddit called");
+        System.out.println(subredditService.findAll());
         return subredditService.findAll();
     }
 
