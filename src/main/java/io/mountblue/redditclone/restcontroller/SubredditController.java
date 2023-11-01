@@ -1,5 +1,6 @@
 package io.mountblue.redditclone.restcontroller;
 
+import io.mountblue.redditclone.entity.Post;
 import io.mountblue.redditclone.entity.Subreddit;
 import io.mountblue.redditclone.repositories.SubredditRepository;
 import io.mountblue.redditclone.service.SubredditService;
@@ -56,5 +57,11 @@ public class SubredditController {
     public String joinSubreddit(@PathVariable Long userId ,@PathVariable Long subRedditId){
         subredditService.joinSubreddit(userId,subRedditId);
         return "Member added Successfully";
+    }
+
+    @GetMapping("/getPost/{subredditId}")
+    public List<Post> getSubredditPostsById(@PathVariable Long subredditId){
+        Subreddit subreddit = subredditService.getSubredditById(subredditId);
+        return subreddit.getSubredditPosts();
     }
 }
