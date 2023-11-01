@@ -3,6 +3,7 @@ package io.mountblue.redditclone.controllers.User;
 import io.mountblue.redditclone.repositories.UserRepository;
 import io.mountblue.redditclone.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,14 +30,18 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<String> submitRegisterMapping(@RequestBody User inputUser) {
 
-        System.out.println(inputUser.getId());
-        System.out.println(inputUser.getEmail());
-        System.out.println(inputUser.getUsername());
-        System.out.println(inputUser.getUserCreatedSubReddits());
+        if (userRepository.findByEmail(inputUser.getEmail()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User with the same email already exists");
+        }
 
-        userRepository.save(inputUser);
+        User user = new User();
+        user.setPassword(inputUser.getPassword());
+        user.setUsername(inputUser.getUsername());
+        user.setEmail(inputUser.getEmail());
+        // User does not exist, so save the new user
+        userRepository.save(user);
 
-        return ResponseEntity.ok("post request to register user");
+        return ResponseEntity.ok("User registered successfully");
     }
 
 
