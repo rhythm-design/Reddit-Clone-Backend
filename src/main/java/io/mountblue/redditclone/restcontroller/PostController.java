@@ -37,7 +37,7 @@ public class PostController {
 
 
     @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String createPost(@RequestParam("post-image") MultipartFile file,
+    public String createPost(@RequestParam(value = "post-image", required = false) MultipartFile file,
                              @RequestParam(value = "postTitle", required = false) String postTitle,
                              @RequestParam(value = "postContent", required = false) String postContent,
                              @RequestParam(value = "postUrl", required = false) String postUrl,
@@ -45,11 +45,12 @@ public class PostController {
                              @RequestParam(value = "subredditId", required = false) Long subredditId,
                              @RequestParam(value = "voteCount", required = false) Long voteCount,
                              @RequestParam(value = "category", required = false) String category,
-                             @RequestParam(value = "flairs", required = false) String flairs
+                             @RequestParam(value = "flairs", required = false) String flairs,
+                             @RequestParam(value = "user-email") String userEmail
                              ) throws IOException {
 
         CreatePostRequest createPostRequest = new CreatePostRequest(postTitle, postContent, file,
-                                                postUrl, isDraft, subredditId, voteCount, category, flairs,"user@admin");
+                                                postUrl, isDraft, subredditId, voteCount, category, flairs,userEmail);
         postService.createPost(createPostRequest);
         return "Post created Sucessfully";
     }

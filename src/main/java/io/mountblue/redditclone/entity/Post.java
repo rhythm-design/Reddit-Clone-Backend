@@ -40,7 +40,7 @@ public class Post {
     @ManyToOne(cascade = {
             CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
     })
-    @JsonBackReference
+    @JsonManagedReference
     private Subreddit subreddit;
 
     private String flair;
@@ -62,7 +62,6 @@ public class Post {
     private String category;
 
     @ManyToOne
-
     private User user;
     public void addComment(Comment comment){
         if(comments == null){
