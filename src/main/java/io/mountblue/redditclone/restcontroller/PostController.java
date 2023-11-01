@@ -49,7 +49,7 @@ public class PostController {
                              ) throws IOException {
 
         CreatePostRequest createPostRequest = new CreatePostRequest(postTitle, postContent, file,
-                                                postUrl, isDraft, subredditId, voteCount, category, flairs,"and@and");
+                                                postUrl, isDraft, subredditId, voteCount, category, flairs,"user@admin");
         postService.createPost(createPostRequest);
         return "Post created Sucessfully";
     }
@@ -89,7 +89,7 @@ public class PostController {
                     .contentType(MediaType.valueOf("image/png"))
                     .body(imageData);
         }
-        return null;
+        return ResponseEntity.ok("");
     }
 
     @GetMapping("/delete/{postId}")
