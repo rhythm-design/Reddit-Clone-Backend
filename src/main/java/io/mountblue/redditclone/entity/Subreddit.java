@@ -20,7 +20,9 @@ public class Subreddit {
     @Column(name = "id")
     private long id;
 
-    @OneToMany(mappedBy = "subreddit", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "subreddit", cascade = {
+            CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
+    })
     @JsonManagedReference
     private List<Post> subredditPosts;
 
