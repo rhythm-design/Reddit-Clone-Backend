@@ -2,7 +2,6 @@ package io.mountblue.redditclone.restcontroller;
 
 import io.mountblue.redditclone.dto.JwtRequest;
 import io.mountblue.redditclone.dto.JwtResponse;
-import io.mountblue.redditclone.entity.User;
 import io.mountblue.redditclone.security.JWTHelper;
 import io.mountblue.redditclone.service.UserService;
 import io.mountblue.redditclone.utils.requests.CreateUserRequest;
@@ -45,7 +44,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
-
         this.doAuthenticate(request.getEmail(), request.getPassword());
 
 
@@ -63,8 +61,6 @@ public class AuthController {
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, password);
         try {
             manager.authenticate(authentication);
-
-
         } catch (BadCredentialsException e) {
             throw new BadCredentialsException(" Invalid Username or Password  !!");
         }
@@ -78,7 +74,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> registerNewUser(@RequestBody CreateUserRequest createUserRequest){
-        System.out.println("New User Details: " + createUserRequest);
         try{
             userService.save(createUserRequest);
         }catch(Exception e){

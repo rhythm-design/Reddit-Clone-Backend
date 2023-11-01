@@ -7,6 +7,7 @@ import io.mountblue.redditclone.repositories.PostRepository;
 import io.mountblue.redditclone.repositories.SubredditRepository;
 import io.mountblue.redditclone.repositories.UserRepository;
 import io.mountblue.redditclone.service.PostService;
+import io.mountblue.redditclone.utils.ImageUtils;
 import io.mountblue.redditclone.utils.requests.CreatePostRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.*;
 
 @Service
@@ -62,13 +67,13 @@ public class PostServiceImpl implements PostService {
         post.setPostTitle(createPostRequest.getPostTitle());
         post.setPostContent(createPostRequest.getPostContent());
         post.setPostUrl(createPostRequest.getPostUrl());
-        post.setImage(createPostRequest.getImage());
+//        post.setImage(createPostRequest.getImage());
         post.setVoteCount(createPostRequest.getVoteCount());
         postRepository.save(post);
     }
 
     @Override
-    public void createPost(CreatePostRequest createPostRequest) {
+    public void createPost(CreatePostRequest createPostRequest) throws IOException {
         Optional<Subreddit> optionalSubreddit = subredditRepository.findById(createPostRequest.getSubredditId());
         if(optionalSubreddit.isEmpty()){
             throw new NoSuchElementException("No subreddit found with id: " + createPostRequest.getSubredditId());
@@ -77,9 +82,7 @@ public class PostServiceImpl implements PostService {
         Post post = new Post();
         post.setPostTitle(createPostRequest.getPostTitle());
         post.setPostContent(createPostRequest.getPostContent());
-//        post.setImage(createPostRequest.getImage());
         post.setImage(null);
-        post.setImage(createPostRequest.getImage());
 
         if(createPostRequest.getFlairs()==null || postSubreddit.getFlairs().contains(createPostRequest.getFlairs())) {
             post.setFlair(createPostRequest.getFlairs()); // setting flairs as a string entered by the user
@@ -91,10 +94,11 @@ public class PostServiceImpl implements PostService {
         post.setDraft(createPostRequest.isDraft());
         post.setSubreddit(postSubreddit);
         post.setCategory(createPostRequest.getCategory());
+        if(createPostRequest.getImage() != null){
+            post.setImage(ImageUtils.compressImage(createPostRequest.getImage().getBytes()));
+        }
         post.setVoteCount(0);
         post.setUser(userRepository.findByEmail(createPostRequest.getUser()).get());
-//        post.setVoteCount(0);
-        post.setVoteCount(createPostRequest.getVoteCount());
         post.setCreateTime(new Date());
         postRepository.save(post);
     }

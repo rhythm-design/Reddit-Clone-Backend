@@ -47,8 +47,8 @@ public class SecurityConfig {
                             try {
                                 authorize.requestMatchers("/**").permitAll()
                                         .requestMatchers("/fillData").permitAll()
-                                        .requestMatchers("/register", "/success", "/api/").permitAll()
-                                        .requestMatchers("/post/**").permitAll()
+                                        .requestMatchers("/register", "/success", "/api/**").permitAll()
+                                        .requestMatchers("/post/").permitAll()
                                         .anyRequest().authenticated()
                                         .and().exceptionHandling(ex -> ex.authenticationEntryPoint(jwtAthenticationEntryPoint))
                                         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
@@ -79,11 +79,6 @@ public class SecurityConfig {
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
-
-    public static final String[] PUBLIC_URLS = {"/api/v1/auth/**", "/v3/api-docs", "/v2/api-docs",
-            "/swagger-resources/**", "/swagger-ui/**", "/webjars/**"
-
-    };
 
 
     @Bean
