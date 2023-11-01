@@ -32,6 +32,7 @@ public class Post {
     @Lob
     @Column(name = "post_image")
     @JsonIgnore
+    @Transient
     private byte[] image;
 
     @Column(name = "post_url")
