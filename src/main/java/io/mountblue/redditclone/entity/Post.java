@@ -37,7 +37,9 @@ public class Post {
     @Column(name = "post_url")
     private String postUrl;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {
+            CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
+    })
     @JsonBackReference
     private Subreddit subreddit;
 

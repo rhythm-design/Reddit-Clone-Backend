@@ -60,6 +60,11 @@ public class PostController {
         postService.updateById(postId, createPostRequest);
     }
 
+    @GetMapping("/delete/{postId}")
+    public void deletePostById(@PathVariable  Long postId) {
+        postService.deletePost(postId);
+    }
+
     @GetMapping("/posts/flair")
     public List<Post> getPostsByFlair(@RequestParam("flair") String flair){
         return postService.findPostsByFlair(flair);
