@@ -49,7 +49,7 @@ public class PostController {
                              ) throws IOException {
 
         CreatePostRequest createPostRequest = new CreatePostRequest(postTitle, postContent, file,
-                                                postUrl, isDraft, subredditId, voteCount, category, flairs);
+                                                postUrl, isDraft, subredditId, voteCount, category, flairs,"and@and");
         postService.createPost(createPostRequest);
         return "Post created Sucessfully";
     }
@@ -82,7 +82,6 @@ public class PostController {
 
     @GetMapping("/post/image/{postId}")
     public ResponseEntity<?> getImageByPostId(@PathVariable Long postId){
-        System.out.println("Get Image: " + postId);
         Post post = postService.findById(postId);
         if(post.getImage() != null){
             byte[] imageData = ImageUtils.decompressImage(post.getImage());

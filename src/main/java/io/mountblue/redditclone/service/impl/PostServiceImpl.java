@@ -99,8 +99,6 @@ public class PostServiceImpl implements PostService {
         }
         post.setVoteCount(0);
         post.setUser(userRepository.findByEmail(createPostRequest.getUser()).get());
-//        post.setVoteCount(0);
-        post.setVoteCount(createPostRequest.getVoteCount());
         post.setCreateTime(new Date());
         postRepository.save(post);
     }
