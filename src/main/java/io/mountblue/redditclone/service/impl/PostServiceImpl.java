@@ -64,10 +64,11 @@ public class PostServiceImpl implements PostService {
             throw new NoSuchElementException("No post find by id: " + id);
         }
         Post post = findById.get();
+        System.out.println("In Impl: "+ post);
+        post.setVoteCount(0L);
         post.setPostTitle(createPostRequest.getPostTitle());
         post.setPostContent(createPostRequest.getPostContent());
         post.setPostUrl(createPostRequest.getPostUrl());
-//        post.setImage(createPostRequest.getImage());
         post.setVoteCount(createPostRequest.getVoteCount());
         postRepository.save(post);
     }
@@ -82,7 +83,7 @@ public class PostServiceImpl implements PostService {
         Post post = new Post();
         post.setPostTitle(createPostRequest.getPostTitle());
         post.setPostContent(createPostRequest.getPostContent());
-        post.setImage(null);
+        post.setVoteCount(0L);
 
         if(createPostRequest.getFlairs()==null || postSubreddit.getFlairs().contains(createPostRequest.getFlairs())) {
             post.setFlair(createPostRequest.getFlairs()); // setting flairs as a string entered by the user
@@ -97,7 +98,6 @@ public class PostServiceImpl implements PostService {
         if(createPostRequest.getImage() != null){
             post.setImage(ImageUtils.compressImage(createPostRequest.getImage().getBytes()));
         }
-        post.setVoteCount(0);
         post.setUser(userRepository.findByEmail(createPostRequest.getUser()).get());
         post.setCreateTime(new Date());
         postRepository.save(post);

@@ -32,7 +32,7 @@ public class Post {
     @Lob
     @Column(name = "post_image")
     @JsonIgnore
-    @Transient
+//    @Transient
     private byte[] image;
 
     @Column(name = "post_url")
@@ -50,7 +50,7 @@ public class Post {
     private boolean isDraft;
 
     @Column(name = "vote_count")
-    private long voteCount;
+    private Long voteCount;
 
     @Column(name = "create_time")
     private Date createTime;

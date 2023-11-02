@@ -8,4 +8,6 @@ import org.springframework.stereotype.Service;
 public interface UserService {
 
     User save(CreateUserRequest createUserRequest);
+
+    String getUsernameByEmail(String email);
 }

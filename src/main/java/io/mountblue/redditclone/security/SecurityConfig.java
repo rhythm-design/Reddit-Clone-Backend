@@ -63,7 +63,7 @@ public class SecurityConfig {
                 )
                 .formLogin(
                         form -> form
-                                .loginPage("/login")
+                                .loginPage("/api/auth/login")
                                 .loginProcessingUrl("/auth")
                                 .permitAll()
                 ).logout(
