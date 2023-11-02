@@ -77,7 +77,7 @@ public class PostController {
     }
 
     @PutMapping("/update/{postId}")
-    public void updatePostById(@PathVariable Long postId, CreatePostRequest createPostRequest){
+    public void updatePostById(@PathVariable Long postId, @RequestBody CreatePostRequest createPostRequest){
         postService.updateById(postId, createPostRequest);
     }
 

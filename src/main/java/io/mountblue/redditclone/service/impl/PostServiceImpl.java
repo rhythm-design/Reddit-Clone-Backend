@@ -58,17 +58,13 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void updateById(Long id, CreatePostRequest createPostRequest) {
-        // Only update Title, Content, URL or Image
+        System.out.println("In Impl: " + " passed: " + createPostRequest);
+
         Optional<Post> findById = postRepository.findById(id);
         if(findById.isEmpty()){
             throw new NoSuchElementException("No post find by id: " + id);
         }
         Post post = findById.get();
-        System.out.println("In Impl: "+ post);
-        post.setVoteCount(0L);
-        post.setPostTitle(createPostRequest.getPostTitle());
-        post.setPostContent(createPostRequest.getPostContent());
-        post.setPostUrl(createPostRequest.getPostUrl());
         post.setVoteCount(createPostRequest.getVoteCount());
         postRepository.save(post);
     }

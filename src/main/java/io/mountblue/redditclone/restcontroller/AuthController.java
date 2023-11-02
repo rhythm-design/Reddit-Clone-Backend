@@ -7,7 +7,6 @@ import io.mountblue.redditclone.repositories.UserRepository;
 import io.mountblue.redditclone.security.JWTHelper;
 import io.mountblue.redditclone.service.UserService;
 import io.mountblue.redditclone.utils.requests.CreateUserRequest;
-import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
